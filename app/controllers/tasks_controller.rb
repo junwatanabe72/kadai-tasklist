@@ -4,26 +4,29 @@ class TasksController < ApplicationController
   
   
   def index
-      @tasks = Task.all
+    
+    if logged_in?
+      @task = current_user.tasks.build  
+      @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(25)
+    end
   end
-
+      
   def show
       
   end
 
   def new
-    @task = Task.new
   end
 
   def create
-    @task = Task.new(task_params)
-
+    @task = current_user.tasks.build(task_params)
+    @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(25)
     if @task.save
       flash[:success] = 'Task が正常に投稿されました'
-      redirect_to @task
+      redirect_to root_url
     else
       flash.now[:danger] = 'Task が投稿されませんでした'
-      render :new
+      render :index
     end 
   end
 

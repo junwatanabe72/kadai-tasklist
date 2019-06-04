@@ -1,0 +1,10 @@
+<%= link_to current_user.name, current_user %>
+    <% tasks.each do |task| %>
+        <ul class="list-unstyled">
+            <li>
+                <%= link_to task.content, task %> <span class="text-muted">posted at <%= task.created_at %></span>
+            </li>
+        </ul>
+      <%= paginate tasks %>
+    <% end %>
+    

@@ -8,12 +8,18 @@
         <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
       </div>
     </div>
+     <%= link_to '一覧に戻る', tasks_path %>
   </aside>
   <div class="col-sm-8">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">Microposts</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Followings</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Followers</a></li>
+     <div class="card-header">
+        <h3 class="card-title">ユーザー　一覧</h3>
+      </div>
+      <div class="card-body">
+    <ul class="list-unstyled">
+      <li>
+        <%= render 'users/users', users: @users %>
+      </li>
     </ul>
+   
   </div>
 </div>
