@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   
   before_action :set_task , only:[:show,:edit,:update,:destroy]
-  
+  before_action :require_user_logged_in, only: [:show,:edit]
+  before_action :cheack_session, only:[:show,:edit]
   
   def index
     
@@ -12,7 +13,7 @@ class TasksController < ApplicationController
   end
       
   def show
-      
+    
   end
 
   def new
@@ -59,6 +60,11 @@ class TasksController < ApplicationController
      @task = Task.find(params[:id])
   end
 
+  def cheack_session
+    if current_user.id != @task.user_id
+      redirect_to root_url
+    end
+  end
 
 
   # Strong Parameter
