@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   
+  before_action :require_user_logged_in, only: [:show,:new,:edit,:create,:destroy]
   before_action :set_task , only:[:show,:edit,:update,:destroy]
-  before_action :require_user_logged_in, only: [:show,:edit]
-  before_action :cheack_session, only:[:show,:edit]
+  before_action :cheack_session, only:[:show,:edit,:create,:destroy]
   
   def index
     
